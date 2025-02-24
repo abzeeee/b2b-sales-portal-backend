@@ -1,52 +1,52 @@
-version: '3.8'
-
-services:
-  user-service-db:
-    image: postgres:latest
-    container_name: user-service-db
-    environment:
-      POSTGRES_USER: user_db_user  # Replace with your username
-      POSTGRES_PASSWORD: 1234  # Replace with your password
-      POSTGRES_DB: user_service_db
-    volumes:
-      - user_service_data:/var/lib/postgresql/data
-
-  product-service-db:
-    image: postgres:latest
-    container_name: product-service-db
-    environment:
-      POSTGRES_USER: product_db_user  # Replace with your username
-      POSTGRES_PASSWORD: 1234  # Replace with your password
-      POSTGRES_DB: product_service_db
-    volumes:
-      - product_service_data:/var/lib/postgresql/data
-
-  user-service:
-    build: ./user-service
-    container_name: user-service
-    ports:
-      - "8081:8080"
-    depends_on:
-      - user-service-db  # Important: Wait for the DB to start
-    environment:  # Database connection details
-      SPRING_DATASOURCE_URL: jdbc:postgresql://user-service-db:5432/user_service_db
-      SPRING_DATASOURCE_USERNAME: user_db_user  # Same as above
-      SPRING_DATASOURCE_PASSWORD: 1234  # Same as above
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
-
-  product-service:
-    build: ./product-service
-    container_name: product-service
-    ports:
-      - "8082:8080"
-    depends_on:
-      - product-service-db  # Important: Wait for the DB to start
-    environment:  # Database connection details
-      SPRING_DATASOURCE_URL: jdbc:postgresql://product-service-db:5432/product_service_db
-      SPRING_DATASOURCE_USERNAME: product_db_user  # Same as above
-      SPRING_DATASOURCE_PASSWORD: 1234  # Same as above
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
-
-volumes:
-  user_service_data:
-  product_service_data:
+#version: '3.8'
+#
+#services:
+#  user-service-db:
+#    image: postgres:latest
+#    container_name: user-service-db
+#    environment:
+#      POSTGRES_USER: user_db_user  # Replace with your username
+#      POSTGRES_PASSWORD: 1234  # Replace with your password
+#      POSTGRES_DB: user_service_db
+#    volumes:
+#      - user_service_data:/var/lib/postgresql/data
+#
+#  product-service-db:
+#    image: postgres:latest
+#    container_name: product-service-db
+#    environment:
+#      POSTGRES_USER: product_db_user  # Replace with your username
+#      POSTGRES_PASSWORD: 1234  # Replace with your password
+#      POSTGRES_DB: product_service_db
+#    volumes:
+#      - product_service_data:/var/lib/postgresql/data
+#
+#  user-service:
+#    build: ./user-service
+#    container_name: user-service
+#    ports:
+#      - "8081:8080"
+#    depends_on:
+#      - user-service-db  # Important: Wait for the DB to start
+#    environment:  # Database connection details
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://user-service-db:5432/user_service_db
+#      SPRING_DATASOURCE_USERNAME: user_db_user  # Same as above
+#      SPRING_DATASOURCE_PASSWORD: 1234  # Same as above
+#      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+#
+#  product-service:
+#    build: ./product-service
+#    container_name: product-service
+#    ports:
+#      - "8082:8080"
+#    depends_on:
+#      - product-service-db  # Important: Wait for the DB to start
+#    environment:  # Database connection details
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://product-service-db:5432/product_service_db
+#      SPRING_DATASOURCE_USERNAME: product_db_user  # Same as above
+#      SPRING_DATASOURCE_PASSWORD: 1234  # Same as above
+#      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+#
+#volumes:
+#  user_service_data:
+#  product_service_data:
