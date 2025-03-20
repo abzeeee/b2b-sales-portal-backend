@@ -56,6 +56,20 @@ public class UserController {
         );
     }
 
+    @PutMapping(
+            path="/deactivate-user",
+            params = "userId"
+    )
+    @Operation(summary = "Deactivate user", description = "Marks a user as Inactive")
+    public  ResponseEntity<StandardResponse> deactivateUser(@RequestParam int userId){
+        String message = userService.deactivateUser(userId);
+        return new ResponseEntity<>(
+                new StandardResponse(200,"User Deactivated Successfully",message),
+                HttpStatus.OK
+        );
+    }
+
+
 
 
 

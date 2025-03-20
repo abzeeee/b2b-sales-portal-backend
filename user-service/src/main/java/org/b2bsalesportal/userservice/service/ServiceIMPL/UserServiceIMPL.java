@@ -69,4 +69,13 @@ public class UserServiceIMPL implements UserService {
         }
         return "Failure";
     }
+
+    @Override
+    public String deactivateUser(int userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(()->new NotFoundException("User not found with id: " + userId));
+        user.setActiveState(false);
+        userRepository.save(user);
+        return "User active state updated Successfully";
+    }
 }

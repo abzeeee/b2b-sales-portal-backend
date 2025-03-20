@@ -13,4 +13,6 @@ public interface UserService {
     List<UserDTO> getAllUsers();
 
     String verify(UserLoginDTO userLoginDTO);
+
+    String deactivateUser(int userId);
 }
