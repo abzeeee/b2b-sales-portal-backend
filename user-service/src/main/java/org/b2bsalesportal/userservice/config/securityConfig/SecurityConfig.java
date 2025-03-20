@@ -63,6 +63,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request->request
                         .requestMatchers("api/v1/user/register","api/v1/user/login")
                         .permitAll()
+                        .requestMatchers("api/v1/user").hasRole("User")
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

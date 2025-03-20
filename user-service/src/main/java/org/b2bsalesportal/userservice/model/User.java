@@ -36,7 +36,7 @@ public class User {
     private String password;
 
     @Column(name = "active_state")
-    private boolean activeState;
+    private boolean activeState = true;
 
     public User(String firstName, String lastName, String email, String contactNumber, String address, String password, boolean activeState) {
         this.firstName = firstName;
